@@ -106,17 +106,8 @@ public class RequestHandler extends AbstractHandler {
                 } catch (NumberFormatException e) {
                     restResult = RestResult.generateWrongParameterValueResult("consume", "limit (l=...) has to be a number (integer).");
                 }
-            } else if (request.getParameter("o") != null) {
-                String topic = request.getParameter("t"); // ?t=...
-                String key = request.getParameter("k"); // ?k=... (can be null)
-                try {
-                    long offset = Long.parseLong(request.getParameter("o")); // ?o=...
-                    restResult = this.kafkaRestProxy.getDataStreamElementsWithOffset(topic, key, offset);
-                } catch (NumberFormatException e) {
-                    restResult = RestResult.generateWrongParameterValueResult("consume", "offset (o=...) has to be a number (long).");
-                }
             } else {
-                restResult = RestResult.generateMissingParameterResult("consume", "limit (l=...) or offset (o=...)");
+                restResult = RestResult.generateMissingParameterResult("consume", "limit (l=...)");
             }
         }
 

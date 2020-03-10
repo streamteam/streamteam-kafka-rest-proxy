@@ -257,61 +257,6 @@ public class KafkaRestProxy {
     }
 
     /**
-     * Generates the RestResult for a /consume REST API call with an offset parameter.
-     *
-     * @param topic  Topic (?t=...) of the /consume REST API call
-     * @param key    Key (?k=...) of the /consume REST API call, or null if /comsume had no key
-     * @param offset Offset (?o=...) of the /consume REST API call
-     * @return RestResult
-     */
-    public RestResult getDataStreamElementsWithOffset(String topic, String key, long offset) {
-        if (this.buffer.containsKey(topic)) {
-            ConcurrentHashMap<String, LinkedList<DataStreamElement>> mapForTopic = this.buffer.get(topic);
-            if (key == null) {
-                key = this.dedicatedAllKey;
-            }
-            if (mapForTopic.containsKey(key)) {
-                LinkedList<DataStreamElement> listForKey = mapForTopic.get(key);
-
-                if (listForKey.getFirst().offset < offset) {
-                    return RestResult.generateNoDataResult(topic, key);
-                } else {
-                    StringBuffer dataJsonArray = new StringBuffer("[");
-                    boolean isFirst = true;
-                    boolean addAll = false;
-
-                    synchronized (listForKey) { // to ensure that a list is only modified or read by one thread at a time
-                        if (listForKey.getLast().offset >= offset) {
-                            addAll = true; // to reduce the number of comparisons in the while loop
-                        }
-                        Iterator<DataStreamElement> iterator = listForKey.iterator();
-                        while (iterator.hasNext()) {
-                            DataStreamElement curElement = iterator.next();
-                            if (addAll || curElement.offset >= offset) {
-                                if (isFirst) {
-                                    isFirst = false;
-                                } else {
-                                    dataJsonArray.append(",");
-                                }
-                                dataJsonArray.append(curElement.getConsumeResultJson());
-                            } else {
-                                break;
-                            }
-                        }
-                    }
-
-                    dataJsonArray.append("]");
-                    return RestResult.generateDataResult(topic, key, dataJsonArray.toString());
-                }
-            } else {
-                return RestResult.generateNoDataResult(topic, key);
-            }
-        } else {
-            return RestResult.generateNoDataResult(topic, key);
-        }
-    }
-
-    /**
      * Generates the RestResult for a /listsTopics REST API call.
      *
      * @return RestResult

@@ -24,7 +24,7 @@
 
     <groupId>ch.unibas.dmi.dbis</groupId>
     <artifactId>streamteam-kafka-rest-proxy</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>StreamTeam - Kafka REST Proxy</name>
     <url>https://dbis.dmi.unibas.ch/research/projects/streamTeam/</url>

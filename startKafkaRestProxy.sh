@@ -22,4 +22,4 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $DIR
-java -DlogFileName=kafkaRestProxy -jar ./target/streamteam-kafka-rest-proxy-1.1.0-jar-with-dependencies.jar
+java -DlogFileName=kafkaRestProxy -jar ./target/streamteam-kafka-rest-proxy-1.2.0-jar-with-dependencies.jar

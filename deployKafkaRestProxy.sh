@@ -25,6 +25,8 @@ die() {
 
 IP=10.34.58.65
 FOLDER=kafkaRestProxy
+USER="ubuntu"
+KEY="$HOME/.ssh/DemoMAAS"
 
 #http://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -34,9 +36,9 @@ cd $DIR
 mvn clean
 mvn package
 
-ssh -i ~/.ssh/lukasPMAAS ubuntu@$IP "rm -Rf $FOLDER"
-ssh -i ~/.ssh/lukasPMAAS ubuntu@$IP "mkdir $FOLDER"
-ssh -i ~/.ssh/lukasPMAAS ubuntu@$IP "mkdir $FOLDER/target"
-scp -i ~/.ssh/lukasPMAAS ./target/streamteam-kafka-rest-proxy-1.1.0-jar-with-dependencies.jar ubuntu@$IP:$FOLDER/target
-scp -i ~/.ssh/lukasPMAAS ./startKafkaRestProxy.sh ubuntu@$IP:$FOLDER
-scp -i ~/.ssh/lukasPMAAS ./stopKafkaRestProxy.sh ubuntu@$IP:$FOLDER
+ssh -i $KEY $USER@$IP "rm -Rf $FOLDER"
+ssh -i $KEY $USER@$IP "mkdir $FOLDER"
+ssh -i $KEY $USER@$IP "mkdir $FOLDER/target"
+scp -i $KEY ./target/streamteam-kafka-rest-proxy-1.2.0-jar-with-dependencies.jar $USER@$IP:$FOLDER/target
+scp -i $KEY ./startKafkaRestProxy.sh $USER@$IP:$FOLDER
+scp -i $KEY ./stopKafkaRestProxy.sh $USER@$IP:$FOLDER

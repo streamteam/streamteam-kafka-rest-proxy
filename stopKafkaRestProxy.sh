@@ -18,4 +18,4 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-pkill -SIGTERM -f 'streamteam-kafka-rest-proxy-1.1.0-jar-with-dependencies.jar';
+pkill -SIGTERM -f 'streamteam-kafka-rest-proxy-1.2.0-jar-with-dependencies.jar';

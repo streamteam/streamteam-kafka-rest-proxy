@@ -24,7 +24,7 @@
 
     <groupId>ch.unibas.dmi.dbis</groupId>
     <artifactId>streamteam-kafka-rest-proxy</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
 
     <name>StreamTeam - Kafka REST Proxy</name>
     <url>https://dbis.dmi.unibas.ch/research/projects/streamTeam/</url>
@@ -92,8 +92,7 @@
         <kafka.version>2.0.1</kafka.version>
         <slf4j.version>1.7.30</slf4j.version>
         <log4j.version>2.13.3</log4j.version>
-        <jetty.version>9.4.31.v20200723</jetty.version>
-        <junit.version>4.12</junit.version>
+        <jetty.version>9.4.36.v20210114</jetty.version>
         <commons.version>1.15</commons.version>
     </properties>
 
